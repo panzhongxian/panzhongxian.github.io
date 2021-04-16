@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - unnamed - /leetcode-cpp/src/1008_construct-binary-search-tree-from-preorder-traversal.h</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">leetcode-cpp/src</a> - 1008_construct-binary-search-tree-from-preorder-traversal.h<span style="font-size: 80%;"> (source / <a href="1008_construct-binary-search-tree-from-preorder-traversal.h.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">unnamed</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">29</td>
+            <td class="headerCovTableEntry">37</td>
+            <td class="headerCovTableEntryMed">78.4 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2021-04-16 09:39:35</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;base.h&quot;</a>
+<a name="2"><span class="lineNum">       2 </span>            : </a>
+<span class="lineNum">       3 </span>            : typedef base::TreeNode&lt;int&gt; TreeNode;
+<span class="lineNum">       4 </span><span class="lineCov">          2 : class Solution {</span>
+<span class="lineNum">       5 </span>            :  private:
+<span class="lineNum">       6 </span>            :   vector&lt;int&gt; v;
+<a name="7"><span class="lineNum">       7 </span>            : </a>
+<span class="lineNum">       8 </span>            :  public:
+<span class="lineNum">       9 </span><span class="lineCov">          1 :   int FindSplitIndex(int root_val, int left, int right) {</span>
+<span class="lineNum">      10 </span>            :     int mid;
+<span class="lineNum">      11 </span><span class="lineCov">          1 :     assert(left &gt;= 0 &amp;&amp; left &lt; v.size());</span>
+<span class="lineNum">      12 </span><span class="lineCov">          1 :     cout &lt;&lt; left &lt;&lt; &quot;----&quot; &lt;&lt; right &lt;&lt; endl;</span>
+<span class="lineNum">      13 </span>            : 
+<span class="lineNum">      14 </span><span class="lineCov">          1 :     while (left &lt; right) {</span>
+<span class="lineNum">      15 </span><span class="lineCov">          1 :       mid = (left + right) / 2;</span>
+<span class="lineNum">      16 </span><span class="lineCov">          1 :       if (v[mid] &lt; root_val) {</span>
+<span class="lineNum">      17 </span><span class="lineCov">          1 :         left = mid + 1;</span>
+<span class="lineNum">      18 </span><span class="lineCov">          1 :         if (left == right) {</span>
+<span class="lineNum">      19 </span><span class="lineCov">          1 :           return right;</span>
+<span class="lineNum">      20 </span>            :         }
+<span class="lineNum">      21 </span>            :       } else {
+<span class="lineNum">      22 </span><span class="lineNoCov">          0 :         right = mid;</span>
+<span class="lineNum">      23 </span>            :       }
+<span class="lineNum">      24 </span>            :     }
+<span class="lineNum">      25 </span>            : 
+<span class="lineNum">      26 </span><span class="lineNoCov">          0 :     int ret = v[left] &gt; root_val ? left : left + 1;</span>
+<span class="lineNum">      27 </span><span class="lineNoCov">          0 :     return ret;</span>
+<a name="28"><span class="lineNum">      28 </span>            :   }</a>
+<span class="lineNum">      29 </span>            : 
+<span class="lineNum">      30 </span><span class="lineCov">          1 :   TreeNode* bstFromPreorder(vector&lt;int&gt;&amp; preorder) {</span>
+<span class="lineNum">      31 </span><span class="lineCov">          1 :     if (preorder.size() == 0) {</span>
+<span class="lineNum">      32 </span><span class="lineNoCov">          0 :       return nullptr;</span>
+<span class="lineNum">      33 </span>            :     }
+<span class="lineNum">      34 </span><span class="lineCov">          1 :     v = preorder;</span>
+<span class="lineNum">      35 </span><span class="lineCov">          1 :     return bstFromPreorder(0, preorder.size());</span>
+<a name="36"><span class="lineNum">      36 </span>            :   }</a>
+<span class="lineNum">      37 </span>            : 
+<span class="lineNum">      38 </span><span class="lineCov">          2 :   TreeNode* bstFromPreorder(int left, int right) {</span>
+<span class="lineNum">      39 </span><span class="lineCov">          2 :     TreeNode* ret = new TreeNode(v[left]);</span>
+<span class="lineNum">      40 </span><span class="lineCov">          2 :     if (left + 1 == right) {  // 注意左开右闭</span>
+<span class="lineNum">      41 </span><span class="lineCov">          1 :       return ret;</span>
+<span class="lineNum">      42 </span>            :     }
+<span class="lineNum">      43 </span>            : 
+<span class="lineNum">      44 </span><span class="lineCov">          1 :     cout &lt;&lt; &quot;LEFT+1: &quot; &lt;&lt; left + 1 &lt;&lt; endl;</span>
+<span class="lineNum">      45 </span><span class="lineCov">          1 :     cout &lt;&lt; &quot;RIGHT: &quot; &lt;&lt; right &lt;&lt; endl;</span>
+<span class="lineNum">      46 </span>            : 
+<span class="lineNum">      47 </span><span class="lineCov">          1 :     int right_start_idx = FindSplitIndex(ret-&gt;val, left + 1, right);</span>
+<span class="lineNum">      48 </span>            : 
+<span class="lineNum">      49 </span><span class="lineCov">          1 :     cout &lt;&lt; &quot;root-&gt;val: &quot; &lt;&lt; ret-&gt;val &lt;&lt; endl;</span>
+<span class="lineNum">      50 </span>            : 
+<span class="lineNum">      51 </span><span class="lineCov">          1 :     if (right_start_idx == left + 1) {</span>
+<span class="lineNum">      52 </span><span class="lineNoCov">          0 :       cout &lt;&lt; &quot;left empty. left: &quot; &lt;&lt; left &lt;&lt; &quot;, right: &quot; &lt;&lt; right &lt;&lt; endl;</span>
+<span class="lineNum">      53 </span><span class="lineNoCov">          0 :       ret-&gt;left = nullptr;</span>
+<span class="lineNum">      54 </span>            :     } else {
+<span class="lineNum">      55 </span><span class="lineCov">          1 :       cout &lt;&lt; &quot;left: [&quot; &lt;&lt; (left + 1) &lt;&lt; &quot;,&quot; &lt;&lt; right_start_idx &lt;&lt; &quot;)&quot; &lt;&lt; endl;</span>
+<span class="lineNum">      56 </span><span class="lineCov">          1 :       ret-&gt;left = bstFromPreorder(left + 1, right_start_idx);</span>
+<span class="lineNum">      57 </span>            :     }
+<span class="lineNum">      58 </span>            : 
+<span class="lineNum">      59 </span><span class="lineCov">          1 :     if (right_start_idx &gt;= right) {</span>
+<span class="lineNum">      60 </span><span class="lineCov">          1 :       cout &lt;&lt; &quot;right empty. left: &quot; &lt;&lt; left &lt;&lt; &quot;, right: &quot; &lt;&lt; right &lt;&lt; endl;</span>
+<span class="lineNum">      61 </span><span class="lineCov">          1 :       ret-&gt;right = nullptr;</span>
+<span class="lineNum">      62 </span>            :     } else {
+<span class="lineNum">      63 </span><span class="lineNoCov">          0 :       cout &lt;&lt; &quot;right: [&quot; &lt;&lt; right_start_idx &lt;&lt; &quot;,&quot; &lt;&lt; right &lt;&lt; &quot;)&quot; &lt;&lt; endl;</span>
+<span class="lineNum">      64 </span><span class="lineNoCov">          0 :       ret-&gt;right = bstFromPreorder(right_start_idx, right);</span>
+<span class="lineNum">      65 </span>            :     }
+<span class="lineNum">      66 </span><span class="lineCov">          1 :     return ret;</span>
+<span class="lineNum">      67 </span>            :   }
+<span class="lineNum">      68 </span>            : };
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

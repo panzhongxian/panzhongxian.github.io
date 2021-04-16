@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - unnamed - /leetcode-cpp/src/0146_lru-cache.h</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">leetcode-cpp/src</a> - 0146_lru-cache.h<span style="font-size: 80%;"> (source / <a href="0146_lru-cache.h.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">unnamed</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">48</td>
+            <td class="headerCovTableEntry">52</td>
+            <td class="headerCovTableEntryHi">92.3 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2021-04-16 09:39:35</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;base.h&quot;</a>
+<span class="lineNum">       2 </span>            : typedef base::BiDirListNode&lt;pair&lt;int, int&gt;&gt; BiDirListNode;
+<span class="lineNum">       3 </span>            : 
+<a name="4"><span class="lineNum">       4 </span>            : class DoubleLinkedList {</a>
+<span class="lineNum">       5 </span>            :  public:
+<span class="lineNum">       6 </span><span class="lineCov">          1 :   DoubleLinkedList(int capacity) {</span>
+<span class="lineNum">       7 </span><span class="lineCov">          1 :     head = new BiDirListNode;</span>
+<span class="lineNum">       8 </span><span class="lineCov">          1 :     tail = new BiDirListNode;</span>
+<span class="lineNum">       9 </span><span class="lineCov">          1 :     head-&gt;next = tail;</span>
+<span class="lineNum">      10 </span><span class="lineCov">          1 :     tail-&gt;prev = head;</span>
+<span class="lineNum">      11 </span><span class="lineCov">          1 :     this-&gt;capacity = capacity;</span>
+<span class="lineNum">      12 </span><span class="lineCov">          1 :     length = 0;</span>
+<a name="13"><span class="lineNum">      13 </span><span class="lineCov">          1 :   }</span></a>
+<span class="lineNum">      14 </span>            : 
+<span class="lineNum">      15 </span><span class="lineCov">          2 :   BiDirListNode *GetTail() {</span>
+<span class="lineNum">      16 </span><span class="lineCov">          2 :     if (length == 0) {</span>
+<span class="lineNum">      17 </span><span class="lineNoCov">          0 :       return nullptr;</span>
+<span class="lineNum">      18 </span>            :     }
+<span class="lineNum">      19 </span><span class="lineCov">          2 :     return tail-&gt;prev;</span>
+<a name="20"><span class="lineNum">      20 </span>            :   }</a>
+<span class="lineNum">      21 </span>            : 
+<span class="lineNum">      22 </span><span class="lineCov">          4 :   bool IsFull() { return capacity == length; }</span>
+<a name="23"><span class="lineNum">      23 </span>            : </a>
+<span class="lineNum">      24 </span>            :   // return whethe it is full;
+<span class="lineNum">      25 </span><span class="lineCov">          7 :   void PushHead(BiDirListNode *node) {</span>
+<span class="lineNum">      26 </span><span class="lineCov">          7 :     node-&gt;next = head-&gt;next;</span>
+<span class="lineNum">      27 </span><span class="lineCov">          7 :     node-&gt;prev = head;</span>
+<span class="lineNum">      28 </span><span class="lineCov">          7 :     head-&gt;next = node;</span>
+<span class="lineNum">      29 </span><span class="lineCov">          7 :     node-&gt;next-&gt;prev = node;</span>
+<span class="lineNum">      30 </span>            : 
+<span class="lineNum">      31 </span><span class="lineCov">          7 :     if (length == capacity) {</span>
+<span class="lineNum">      32 </span><span class="lineCov">          2 :       auto prev_prev = tail-&gt;prev-&gt;prev;</span>
+<span class="lineNum">      33 </span><span class="lineCov">          2 :       prev_prev-&gt;next = tail;</span>
+<span class="lineNum">      34 </span><span class="lineCov">          2 :       delete tail-&gt;prev;</span>
+<span class="lineNum">      35 </span><span class="lineCov">          2 :       tail-&gt;prev = prev_prev;</span>
+<span class="lineNum">      36 </span>            :     } else {
+<span class="lineNum">      37 </span><span class="lineCov">          5 :       length++;</span>
+<a name="38"><span class="lineNum">      38 </span>            :     }</a>
+<span class="lineNum">      39 </span><span class="lineCov">          7 :   }</span>
+<span class="lineNum">      40 </span><span class="lineCov">          3 :   void MoveToHead(BiDirListNode *node) {</span>
+<span class="lineNum">      41 </span><span class="lineCov">          3 :     auto prev = node-&gt;prev;</span>
+<span class="lineNum">      42 </span><span class="lineCov">          3 :     auto next = node-&gt;next;</span>
+<span class="lineNum">      43 </span><span class="lineCov">          3 :     next-&gt;prev = prev;</span>
+<span class="lineNum">      44 </span><span class="lineCov">          3 :     prev-&gt;next = next;</span>
+<span class="lineNum">      45 </span><span class="lineCov">          3 :     length--;</span>
+<span class="lineNum">      46 </span><span class="lineCov">          3 :     PushHead(node);</span>
+<span class="lineNum">      47 </span><span class="lineCov">          3 :   }</span>
+<span class="lineNum">      48 </span>            : 
+<span class="lineNum">      49 </span>            :  private:
+<span class="lineNum">      50 </span>            :   BiDirListNode *head;
+<span class="lineNum">      51 </span>            :   BiDirListNode *tail;
+<span class="lineNum">      52 </span>            :   int capacity;
+<span class="lineNum">      53 </span>            :   int length;
+<a name="54"><span class="lineNum">      54 </span>            : };</a>
+<span class="lineNum">      55 </span>            : 
+<a name="56"><span class="lineNum">      56 </span><span class="lineCov">          1 : class LRUCache {</span></a>
+<span class="lineNum">      57 </span>            :  public:
+<a name="58"><span class="lineNum">      58 </span><span class="lineCov">          1 :   LRUCache(int capacity) { list = new DoubleLinkedList(capacity); }</span></a>
+<span class="lineNum">      59 </span>            : 
+<span class="lineNum">      60 </span><span class="lineCov">          5 :   int get(int key) {</span>
+<span class="lineNum">      61 </span><span class="lineCov">          5 :     if (kv.count(key) == 0) {</span>
+<span class="lineNum">      62 </span><span class="lineCov">          2 :       return -1;</span>
+<span class="lineNum">      63 </span>            :     } else {
+<span class="lineNum">      64 </span><span class="lineCov">          3 :       list-&gt;MoveToHead(kv[key]);</span>
+<span class="lineNum">      65 </span><span class="lineCov">          3 :       return kv[key]-&gt;val.second;</span>
+<span class="lineNum">      66 </span>            :     }
+<a name="67"><span class="lineNum">      67 </span>            :   }</a>
+<span class="lineNum">      68 </span>            : 
+<span class="lineNum">      69 </span><span class="lineCov">          4 :   void put(int key, int value) {</span>
+<span class="lineNum">      70 </span><span class="lineCov">          4 :     if (kv.count(key) &gt; 0) {</span>
+<span class="lineNum">      71 </span><span class="lineNoCov">          0 :       list-&gt;MoveToHead(kv[key]);</span>
+<span class="lineNum">      72 </span><span class="lineNoCov">          0 :       kv[key]-&gt;val.second = value;</span>
+<span class="lineNum">      73 </span><span class="lineNoCov">          0 :       return;</span>
+<span class="lineNum">      74 </span>            :     }
+<span class="lineNum">      75 </span>            : 
+<span class="lineNum">      76 </span><span class="lineCov">          4 :     if (list-&gt;IsFull()) {</span>
+<span class="lineNum">      77 </span><span class="lineCov">          2 :       auto tail_node = list-&gt;GetTail();</span>
+<span class="lineNum">      78 </span><span class="lineCov">          2 :       kv.erase(kv.find(tail_node-&gt;val.first));</span>
+<span class="lineNum">      79 </span>            :     }
+<span class="lineNum">      80 </span><span class="lineCov">          4 :     cout &lt;&lt; &quot;PushHead&quot; &lt;&lt; endl;</span>
+<span class="lineNum">      81 </span><span class="lineCov">          4 :     auto new_node = new BiDirListNode(pair&lt;int, int&gt;(key, value));</span>
+<span class="lineNum">      82 </span><span class="lineCov">          4 :     list-&gt;PushHead(new_node);</span>
+<span class="lineNum">      83 </span><span class="lineCov">          4 :     kv[key] = new_node;</span>
+<span class="lineNum">      84 </span>            :   }
+<span class="lineNum">      85 </span>            : 
+<span class="lineNum">      86 </span>            :  private:
+<span class="lineNum">      87 </span>            :   DoubleLinkedList *list;
+<span class="lineNum">      88 </span>            :   map&lt;int, BiDirListNode *&gt; kv;
+<span class="lineNum">      89 </span>            : };
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

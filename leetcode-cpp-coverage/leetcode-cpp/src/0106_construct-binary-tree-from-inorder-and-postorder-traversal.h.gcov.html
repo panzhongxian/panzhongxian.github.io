@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - unnamed - /leetcode-cpp/src/0106_construct-binary-tree-from-inorder-and-postorder-traversal.h</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">leetcode-cpp/src</a> - 0106_construct-binary-tree-from-inorder-and-postorder-traversal.h<span style="font-size: 80%;"> (source / <a href="0106_construct-binary-tree-from-inorder-and-postorder-traversal.h.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">unnamed</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">18</td>
+            <td class="headerCovTableEntry">19</td>
+            <td class="headerCovTableEntryHi">94.7 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2021-04-16 09:39:35</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;base.h&quot;</a>
+<span class="lineNum">       2 </span>            : 
+<span class="lineNum">       3 </span>            : typedef base::TreeNode&lt;int&gt; TreeNode;
+<span class="lineNum">       4 </span>            : 
+<span class="lineNum">       5 </span>            : class Solution {
+<span class="lineNum">       6 </span>            :   vector&lt;int&gt;* inorder;
+<span class="lineNum">       7 </span>            :   vector&lt;int&gt;* postorder;
+<a name="8"><span class="lineNum">       8 </span>            : </a>
+<span class="lineNum">       9 </span>            :  public:
+<span class="lineNum">      10 </span><span class="lineCov">          1 :   TreeNode* buildTree(vector&lt;int&gt;&amp; inorder, vector&lt;int&gt;&amp; postorder) {</span>
+<span class="lineNum">      11 </span><span class="lineCov">          1 :     this-&gt;inorder = &amp;inorder;</span>
+<span class="lineNum">      12 </span><span class="lineCov">          1 :     this-&gt;postorder = &amp;postorder;</span>
+<span class="lineNum">      13 </span><span class="lineCov">          1 :     return buildTreeWithIterator(0, 0, inorder.size());</span>
+<a name="14"><span class="lineNum">      14 </span>            :   }</a>
+<span class="lineNum">      15 </span>            : 
+<span class="lineNum">      16 </span><span class="lineCov">          5 :   TreeNode* buildTreeWithIterator(size_t in_begin, size_t post_begin,</span>
+<span class="lineNum">      17 </span>            :                                   size_t len) {
+<span class="lineNum">      18 </span><span class="lineCov">          5 :     if (len == 0) {</span>
+<span class="lineNum">      19 </span><span class="lineNoCov">          0 :       return nullptr;</span>
+<span class="lineNum">      20 </span>            :     }
+<span class="lineNum">      21 </span><span class="lineCov">          5 :     int root_val = (*postorder)[post_begin + len - 1];</span>
+<span class="lineNum">      22 </span><span class="lineCov">          5 :     cout &lt;&lt; &quot;node_val[&quot; &lt;&lt; root_val &lt;&lt; &quot;], len[&quot; &lt;&lt; len &lt;&lt; &quot;]&quot; &lt;&lt; endl;</span>
+<span class="lineNum">      23 </span>            : 
+<span class="lineNum">      24 </span><span class="lineCov">          5 :     TreeNode* ret = new TreeNode(root_val);</span>
+<span class="lineNum">      25 </span><span class="lineCov">          5 :     if (len == 1) {</span>
+<span class="lineNum">      26 </span><span class="lineCov">          3 :       return ret;</span>
+<span class="lineNum">      27 </span>            :     }
+<span class="lineNum">      28 </span>            : 
+<span class="lineNum">      29 </span><span class="lineCov">          2 :     int left_len = 0;</span>
+<span class="lineNum">      30 </span><span class="lineCov">          4 :     while ((*inorder)[in_begin + (left_len++)] != root_val) {</span>
+<span class="lineNum">      31 </span>            :     }
+<span class="lineNum">      32 </span><span class="lineCov">          2 :     left_len = left_len - 1;</span>
+<span class="lineNum">      33 </span>            : 
+<span class="lineNum">      34 </span><span class="lineCov">          2 :     ret-&gt;left = buildTreeWithIterator(in_begin, post_begin, left_len);</span>
+<span class="lineNum">      35 </span><span class="lineCov">          4 :     ret-&gt;right = buildTreeWithIterator(</span>
+<span class="lineNum">      36 </span><span class="lineCov">          4 :         in_begin + left_len + 1, post_begin + left_len, len - left_len - 1);</span>
+<span class="lineNum">      37 </span><span class="lineCov">          2 :     return ret;</span>
+<span class="lineNum">      38 </span>            :   }
+<span class="lineNum">      39 </span>            : };
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
