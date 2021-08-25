@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - unnamed - /leetcode-cpp/src/0057_insert-interval.h</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">leetcode-cpp/src</a> - 0057_insert-interval.h<span style="font-size: 80%;"> (source / <a href="0057_insert-interval.h.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">unnamed</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">19</td>
+            <td class="headerCovTableEntry">21</td>
+            <td class="headerCovTableEntryHi">90.5 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2021-08-25 03:18:00</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &lt;algorithm&gt;</a>
+<span class="lineNum">       2 </span>            : #include &lt;vector&gt;
+<span class="lineNum">       3 </span>            : 
+<span class="lineNum">       4 </span>            : using std::max;
+<span class="lineNum">       5 </span>            : using std::min;
+<span class="lineNum">       6 </span>            : using std::vector;
+<span class="lineNum">       7 </span>            : 
+<span class="lineNum">       8 </span>            : class Solution {
+<a name="9"><span class="lineNum">       9 </span>            :  public:</a>
+<span class="lineNum">      10 </span>            :   // 返回是否发生merge
+<span class="lineNum">      11 </span><span class="lineCov">          7 :   bool MergeInterval(const vector&lt;int&gt;&amp; v1, vector&lt;int&gt;&amp; v2) {</span>
+<span class="lineNum">      12 </span><span class="lineCov">          7 :     if (v1[0] &gt; v2[1] || v2[0] &gt; v1[1]) {</span>
+<span class="lineNum">      13 </span><span class="lineCov">          3 :       return false;</span>
+<span class="lineNum">      14 </span>            :     }
+<span class="lineNum">      15 </span>            : 
+<span class="lineNum">      16 </span><span class="lineCov">          4 :     v2[0] = min(v2[0], v1[0]);</span>
+<span class="lineNum">      17 </span><span class="lineCov">          4 :     v2[1] = max(v2[1], v1[1]);</span>
+<a name="18"><span class="lineNum">      18 </span><span class="lineCov">          4 :     return true;</span></a>
+<span class="lineNum">      19 </span>            :   }
+<span class="lineNum">      20 </span><span class="lineCov">          3 :   vector&lt;vector&lt;int&gt;&gt; insert(vector&lt;vector&lt;int&gt;&gt;&amp; intervals,</span>
+<span class="lineNum">      21 </span>            :                              vector&lt;int&gt;&amp; newInterval) {
+<span class="lineNum">      22 </span><span class="lineCov">          3 :     vector&lt;vector&lt;int&gt;&gt; ret;</span>
+<span class="lineNum">      23 </span><span class="lineCov">         10 :     for (const auto&amp; interval : intervals) {</span>
+<span class="lineNum">      24 </span><span class="lineCov">          7 :       if (MergeInterval(interval, newInterval)) {</span>
+<span class="lineNum">      25 </span><span class="lineCov">          4 :         continue;</span>
+<span class="lineNum">      26 </span>            :       }
+<span class="lineNum">      27 </span><span class="lineCov">          3 :       ret.push_back(interval);</span>
+<span class="lineNum">      28 </span>            :     }
+<span class="lineNum">      29 </span>            : 
+<span class="lineNum">      30 </span><span class="lineCov">          3 :     if (ret.empty()) {</span>
+<span class="lineNum">      31 </span><span class="lineCov">          1 :       ret.push_back(newInterval);</span>
+<span class="lineNum">      32 </span><span class="lineCov">          1 :       return ret;</span>
+<span class="lineNum">      33 </span>            :     }
+<span class="lineNum">      34 </span>            : 
+<span class="lineNum">      35 </span><span class="lineCov">          3 :     for (auto it = ret.begin(); it != ret.end(); it++) {</span>
+<span class="lineNum">      36 </span><span class="lineCov">          3 :       if (newInterval[1] &lt; (*it)[0]) {</span>
+<span class="lineNum">      37 </span><span class="lineCov">          2 :         ret.insert(it, newInterval);</span>
+<span class="lineNum">      38 </span><span class="lineCov">          2 :         return ret;</span>
+<span class="lineNum">      39 </span>            :       }
+<span class="lineNum">      40 </span>            :     }
+<span class="lineNum">      41 </span><span class="lineNoCov">          0 :     ret.push_back(newInterval);</span>
+<span class="lineNum">      42 </span><span class="lineNoCov">          0 :     return ret;</span>
+<span class="lineNum">      43 </span>            :   }
+<span class="lineNum">      44 </span>            : };
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
