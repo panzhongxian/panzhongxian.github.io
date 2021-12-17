@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - unnamed - src/0103_binary-tree-zigzag-level-order-traversal.h</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">src</a> - 0103_binary-tree-zigzag-level-order-traversal.h<span style="font-size: 80%;"> (source / <a href="0103_binary-tree-zigzag-level-order-traversal.h.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">unnamed</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">23</td>
+            <td class="headerCovTableEntry">23</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2021-12-17 07:07:10</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;base.h&quot;</a>
+<span class="lineNum">       2 </span>            : 
+<span class="lineNum">       3 </span>            : typedef base::TreeNode&lt;int&gt; TreeNode;
+<span class="lineNum">       4 </span>            : 
+<a name="5"><span class="lineNum">       5 </span>            : class Solution {</a>
+<span class="lineNum">       6 </span>            :  public:
+<span class="lineNum">       7 </span><span class="lineCov">          6 :   vector&lt;vector&lt;int&gt;&gt; zigzagLevelOrder(TreeNode* root) {</span>
+<span class="lineNum">       8 </span><span class="lineCov">          6 :     if (!root) {</span>
+<span class="lineNum">       9 </span><span class="lineCov">          1 :       return vector&lt;vector&lt;int&gt;&gt;();</span>
+<span class="lineNum">      10 </span>            :     }
+<span class="lineNum">      11 </span><span class="lineCov">         10 :     vector&lt;vector&lt;int&gt;&gt; ret;</span>
+<span class="lineNum">      12 </span><span class="lineCov">         10 :     vector&lt;TreeNode*&gt; cur_layer, next_layer;</span>
+<span class="lineNum">      13 </span><span class="lineCov">          5 :     cur_layer.push_back(root);</span>
+<span class="lineNum">      14 </span><span class="lineCov">         10 :     vector&lt;int&gt; cur_layer_val_vec;</span>
+<span class="lineNum">      15 </span>            : 
+<span class="lineNum">      16 </span><span class="lineCov">          5 :     bool reverse_flag = false;</span>
+<span class="lineNum">      17 </span><span class="lineCov">         29 :     while (cur_layer.size()) {</span>
+<span class="lineNum">      18 </span><span class="lineCov">         12 :       cur_layer_val_vec.clear();</span>
+<span class="lineNum">      19 </span><span class="lineCov">         12 :       next_layer.clear();</span>
+<span class="lineNum">      20 </span>            : 
+<span class="lineNum">      21 </span><span class="lineCov">         31 :       for (auto node : cur_layer) {</span>
+<span class="lineNum">      22 </span><span class="lineCov">         19 :         cur_layer_val_vec.push_back(node-&gt;val);</span>
+<span class="lineNum">      23 </span>            : 
+<span class="lineNum">      24 </span><span class="lineCov">         19 :         if (node-&gt;left) {</span>
+<span class="lineNum">      25 </span><span class="lineCov">          6 :           next_layer.push_back(node-&gt;left);</span>
+<span class="lineNum">      26 </span>            :         }
+<span class="lineNum">      27 </span><span class="lineCov">         19 :         if (node-&gt;right) {</span>
+<span class="lineNum">      28 </span><span class="lineCov">          8 :           next_layer.push_back(node-&gt;right);</span>
+<span class="lineNum">      29 </span>            :         }
+<span class="lineNum">      30 </span>            :       }
+<span class="lineNum">      31 </span><span class="lineCov">         12 :       if (reverse_flag) {</span>
+<span class="lineNum">      32 </span><span class="lineCov">          5 :         reverse(cur_layer_val_vec.begin(), cur_layer_val_vec.end());</span>
+<span class="lineNum">      33 </span>            :       }
+<span class="lineNum">      34 </span><span class="lineCov">         12 :       cur_layer = move(next_layer);</span>
+<span class="lineNum">      35 </span><span class="lineCov">         12 :       ret.push_back(move(cur_layer_val_vec));</span>
+<span class="lineNum">      36 </span><span class="lineCov">         12 :       reverse_flag = !reverse_flag;</span>
+<span class="lineNum">      37 </span>            :     }
+<span class="lineNum">      38 </span><span class="lineCov">          5 :     return ret;</span>
+<span class="lineNum">      39 </span>            :   }
+<span class="lineNum">      40 </span>            : };
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

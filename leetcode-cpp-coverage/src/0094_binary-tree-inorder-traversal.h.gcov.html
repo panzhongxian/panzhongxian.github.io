@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - unnamed - src/0094_binary-tree-inorder-traversal.h</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">src</a> - 0094_binary-tree-inorder-traversal.h<span style="font-size: 80%;"> (source / <a href="0094_binary-tree-inorder-traversal.h.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">unnamed</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">23</td>
+            <td class="headerCovTableEntry">24</td>
+            <td class="headerCovTableEntryHi">95.8 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2021-12-17 07:07:10</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;base.h&quot;</a>
+<span class="lineNum">       2 </span>            : 
+<span class="lineNum">       3 </span>            : typedef base::TreeNode&lt;int&gt; TreeNode;
+<span class="lineNum">       4 </span>            : 
+<a name="5"><span class="lineNum">       5 </span>            : class Solution {</a>
+<span class="lineNum">       6 </span>            :  public:
+<span class="lineNum">       7 </span><span class="lineCov">          1 :   vector&lt;int&gt; inorderTraversal(TreeNode* root) {</span>
+<span class="lineNum">       8 </span><span class="lineCov">          1 :     if (!root) {</span>
+<span class="lineNum">       9 </span><span class="lineNoCov">          0 :       return vector&lt;int&gt;();</span>
+<span class="lineNum">      10 </span>            :     }
+<span class="lineNum">      11 </span>            : 
+<span class="lineNum">      12 </span><span class="lineCov">          2 :     vector&lt;int&gt; ret;</span>
+<span class="lineNum">      13 </span>            :     TreeNode* cur;
+<span class="lineNum">      14 </span><span class="lineCov">          1 :     int stack_top_idx = 0;</span>
+<span class="lineNum">      15 </span><span class="lineCov">          2 :     vector&lt;TreeNode*&gt; stack;</span>
+<span class="lineNum">      16 </span><span class="lineCov">          1 :     stack.push_back(root);</span>
+<span class="lineNum">      17 </span>            : 
+<span class="lineNum">      18 </span><span class="lineCov">         15 :     while (stack.size()) {</span>
+<span class="lineNum">      19 </span><span class="lineCov">          7 :       cur = stack[stack_top_idx];</span>
+<span class="lineNum">      20 </span><span class="lineCov">          7 :       if (cur-&gt;left) {</span>
+<span class="lineNum">      21 </span><span class="lineCov">          5 :         while (cur-&gt;left) {</span>
+<span class="lineNum">      22 </span><span class="lineCov">          2 :           stack.push_back(cur-&gt;left);</span>
+<span class="lineNum">      23 </span><span class="lineCov">          2 :           stack_top_idx++;</span>
+<span class="lineNum">      24 </span>            : 
+<span class="lineNum">      25 </span><span class="lineCov">          2 :           auto left = cur-&gt;left;</span>
+<span class="lineNum">      26 </span>            :           // TODO: 有没有方法可以改变原来树的内容
+<span class="lineNum">      27 </span><span class="lineCov">          2 :           cur-&gt;left = nullptr;</span>
+<span class="lineNum">      28 </span><span class="lineCov">          2 :           cur = left;</span>
+<span class="lineNum">      29 </span>            :         }
+<span class="lineNum">      30 </span><span class="lineCov">          1 :         continue;</span>
+<span class="lineNum">      31 </span>            :       }
+<span class="lineNum">      32 </span>            : 
+<span class="lineNum">      33 </span><span class="lineCov">          6 :       ret.push_back(cur-&gt;val);</span>
+<span class="lineNum">      34 </span><span class="lineCov">          6 :       stack.pop_back();</span>
+<span class="lineNum">      35 </span><span class="lineCov">          6 :       stack_top_idx--;</span>
+<span class="lineNum">      36 </span>            : 
+<span class="lineNum">      37 </span><span class="lineCov">          6 :       if (cur-&gt;right) {</span>
+<span class="lineNum">      38 </span><span class="lineCov">          3 :         stack.push_back(cur-&gt;right);</span>
+<span class="lineNum">      39 </span><span class="lineCov">          3 :         stack_top_idx++;</span>
+<span class="lineNum">      40 </span>            :       }
+<span class="lineNum">      41 </span>            :     }
+<span class="lineNum">      42 </span><span class="lineCov">          1 :     return ret;</span>
+<span class="lineNum">      43 </span>            :   }
+<span class="lineNum">      44 </span>            : };
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

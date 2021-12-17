@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - unnamed - src/0054_spiral-matrix.h</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">src</a> - 0054_spiral-matrix.h<span style="font-size: 80%;"> (source / <a href="0054_spiral-matrix.h.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">unnamed</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">52</td>
+            <td class="headerCovTableEntry">54</td>
+            <td class="headerCovTableEntryHi">96.3 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2021-12-17 07:07:10</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;base.h&quot;</a>
+<span class="lineNum">       2 </span>            : 
+<a name="3"><span class="lineNum">       3 </span>            : class Solution {</a>
+<span class="lineNum">       4 </span>            :  public:
+<span class="lineNum">       5 </span><span class="lineCov">          7 :   vector&lt;int&gt; spiralOrder(const vector&lt;vector&lt;int&gt;&gt;&amp; matrix) {</span>
+<span class="lineNum">       6 </span><span class="lineCov">          7 :     vector&lt;int&gt; ret;</span>
+<span class="lineNum">       7 </span><span class="lineCov">          7 :     if (matrix.size() == 0 || matrix[0].size() == 0) {</span>
+<span class="lineNum">       8 </span><span class="lineCov">          2 :       return ret;</span>
+<span class="lineNum">       9 </span>            :     }
+<span class="lineNum">      10 </span><span class="lineCov">          5 :     if (matrix[0].size() == 1) {</span>
+<span class="lineNum">      11 </span><span class="lineCov">          6 :       for (auto&amp; v : matrix) {</span>
+<span class="lineNum">      12 </span><span class="lineCov">          4 :         ret.push_back(v[0]);</span>
+<span class="lineNum">      13 </span>            :       }
+<span class="lineNum">      14 </span><span class="lineCov">          2 :       return ret;</span>
+<span class="lineNum">      15 </span>            :     }
+<span class="lineNum">      16 </span><span class="lineCov">          3 :     int direction = 0;  // 0: right,  1: down, 2: left, 3: up</span>
+<span class="lineNum">      17 </span>            :     // p1, p2
+<span class="lineNum">      18 </span>            :     // p4, p3
+<span class="lineNum">      19 </span><span class="lineCov">          3 :     auto p0 = pair&lt;int, int&gt;{0, 0};</span>
+<span class="lineNum">      20 </span><span class="lineCov">          3 :     auto p1 = pair&lt;int, int&gt;{1, 0};</span>
+<span class="lineNum">      21 </span><span class="lineCov">          3 :     auto p2 = pair&lt;int, int&gt;{0, matrix[0].size() - 1};</span>
+<span class="lineNum">      22 </span><span class="lineCov">          3 :     auto p3 = pair&lt;int, int&gt;{matrix.size() - 1, matrix[0].size() - 1};</span>
+<span class="lineNum">      23 </span><span class="lineCov">          3 :     auto p4 = pair&lt;int, int&gt;{matrix.size() - 1, 0};</span>
+<span class="lineNum">      24 </span>            : #define PUSH_BACK                                                     \
+<span class="lineNum">      25 </span>            :   {                                                                   \
+<span class="lineNum">      26 </span>            :     /*cout &lt;&lt; &quot;(&quot; &lt;&lt; p0.first &lt;&lt; &quot;, &quot; &lt;&lt; p0.second &lt;&lt; &quot;)&quot; &lt;&lt; endl; */ \
+<span class="lineNum">      27 </span>            :     ret.push_back(matrix[p0.first][p0.second]);                       \
+<span class="lineNum">      28 </span>            :   }
+<span class="lineNum">      29 </span>            : 
+<span class="lineNum">      30 </span><span class="lineCov">          3 :     ret.push_back(matrix[0][0]);</span>
+<span class="lineNum">      31 </span><span class="lineCov">         12 :     while (true) {</span>
+<span class="lineNum">      32 </span><span class="lineCov">         15 :       switch (direction) {</span>
+<span class="lineNum">      33 </span><span class="lineCov">          5 :         case 0:</span>
+<span class="lineNum">      34 </span><span class="lineCov">          5 :           if (p0.second &gt;= p2.second) {</span>
+<span class="lineNum">      35 </span><span class="lineNoCov">          0 :             return ret;</span>
+<span class="lineNum">      36 </span>            :           }
+<span class="lineNum">      37 </span><span class="lineCov">         21 :           while (p0.second &lt; p2.second) {</span>
+<span class="lineNum">      38 </span><span class="lineCov">          8 :             p0.second++;</span>
+<span class="lineNum">      39 </span><span class="lineCov">          8 :             PUSH_BACK;</span>
+<span class="lineNum">      40 </span>            :           }
+<span class="lineNum">      41 </span><span class="lineCov">          5 :           p2.first++;</span>
+<span class="lineNum">      42 </span><span class="lineCov">          5 :           p2.second--;</span>
+<span class="lineNum">      43 </span><span class="lineCov">          5 :           break;</span>
+<span class="lineNum">      44 </span><span class="lineCov">          5 :         case 1:</span>
+<span class="lineNum">      45 </span><span class="lineCov">          5 :           if (p0.first &gt;= p3.first) {</span>
+<span class="lineNum">      46 </span><span class="lineCov">          2 :             return ret;</span>
+<span class="lineNum">      47 </span>            :           }
+<span class="lineNum">      48 </span><span class="lineCov">         15 :           while (p0.first &lt; p3.first) {</span>
+<span class="lineNum">      49 </span><span class="lineCov">          6 :             p0.first++;</span>
+<span class="lineNum">      50 </span><span class="lineCov">          6 :             PUSH_BACK;</span>
+<span class="lineNum">      51 </span>            :           }
+<span class="lineNum">      52 </span><span class="lineCov">          3 :           p3.first--;</span>
+<span class="lineNum">      53 </span><span class="lineCov">          3 :           p3.second--;</span>
+<span class="lineNum">      54 </span><span class="lineCov">          3 :           break;</span>
+<span class="lineNum">      55 </span><span class="lineCov">          3 :         case 2:</span>
+<span class="lineNum">      56 </span><span class="lineCov">          3 :           if (p0.second &lt;= p4.second) {</span>
+<span class="lineNum">      57 </span><span class="lineCov">          1 :             return ret;</span>
+<span class="lineNum">      58 </span>            :           }
+<span class="lineNum">      59 </span><span class="lineCov">         10 :           while (p0.second &gt; p4.second) {</span>
+<span class="lineNum">      60 </span><span class="lineCov">          4 :             p0.second--;</span>
+<span class="lineNum">      61 </span><span class="lineCov">          4 :             PUSH_BACK;</span>
+<span class="lineNum">      62 </span>            :           }
+<span class="lineNum">      63 </span><span class="lineCov">          2 :           p4.first--;</span>
+<span class="lineNum">      64 </span><span class="lineCov">          2 :           p4.second++;</span>
+<span class="lineNum">      65 </span><span class="lineCov">          2 :           break;</span>
+<span class="lineNum">      66 </span><span class="lineCov">          2 :         case 3:</span>
+<span class="lineNum">      67 </span><span class="lineCov">          2 :           if (p0.first &lt;= p1.first) {</span>
+<span class="lineNum">      68 </span><span class="lineNoCov">          0 :             return ret;</span>
+<span class="lineNum">      69 </span>            :           }
+<span class="lineNum">      70 </span><span class="lineCov">          8 :           while (p0.first &gt; p1.first) {</span>
+<span class="lineNum">      71 </span><span class="lineCov">          3 :             p0.first--;</span>
+<span class="lineNum">      72 </span><span class="lineCov">          3 :             PUSH_BACK;</span>
+<span class="lineNum">      73 </span>            :           }
+<span class="lineNum">      74 </span><span class="lineCov">          2 :           p1.first++;</span>
+<span class="lineNum">      75 </span><span class="lineCov">          2 :           p1.second++;</span>
+<span class="lineNum">      76 </span><span class="lineCov">          2 :           break;</span>
+<span class="lineNum">      77 </span>            :       }
+<span class="lineNum">      78 </span><span class="lineCov">         12 :       direction = (direction + 1) % 4;</span>
+<span class="lineNum">      79 </span>            :     }
+<span class="lineNum">      80 </span>            :     return ret;
+<span class="lineNum">      81 </span>            :   }
+<span class="lineNum">      82 </span>            : };
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
